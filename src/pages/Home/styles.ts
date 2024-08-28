@@ -110,4 +110,3 @@ export const StartCountdownButton = styled.button`
   }
 `
 export const PlayButton = styled.div``
-
