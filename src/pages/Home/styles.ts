@@ -109,3 +109,5 @@ export const StartCountdownButton = styled.button`
     background: ${(props) => props.theme['green-700']};
   }
 `
+export const PlayButton = styled.div``
+
