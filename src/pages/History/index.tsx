@@ -1,57 +1,47 @@
-import { HistoryContainer, HistoryList, Status } from './styles'
+import { useContext } from "react";
+import { HistoryContainer, HistoryList, Status } from "./styles";
+import { CyclesContext } from "../../contexts/CyclesContext";
 
 export function History() {
+  const { cycles } = useContext(CyclesContext);
   return (
     <HistoryContainer>
       <h1>Meu Histórico</h1>
-      <div>
-        <HistoryList>
-          <table>
-            <thead>
-              <tr>
-                <th>Tarefa</th>
-                <th>Duração</th>
-                <th>Início</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Tarefa</td>
-                <td>20 Minutos</td>
-                <td>Há 2 meses</td>
-                <td>
-                  <Status statusColor="green">Concluido</Status>
-                </td>
-              </tr>
-              <tr>
-                <td>Tarefa</td>
-                <td>20 Minutos</td>
-                <td>Há 2 meses</td>
-                <td>
-                  <Status statusColor="green">Concluido</Status>
-                </td>
-              </tr>
-              <tr>
-                <td>Tarefa</td>
-                <td>20 Minutos</td>
-                <td>Há 2 meses</td>
-                <td>
-                  <Status statusColor="yellow">Em andamento</Status>
-                </td>
-              </tr>
-              <tr>
-                <td>Tarefa</td>
-                <td>20 Minutos</td>
-                <td>Há 2 meses</td>
-                <td>
-                  <Status statusColor="red">Interrompido</Status>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </HistoryList>
-      </div>
+
+      <HistoryList>
+        <table>
+          <thead>
+            <tr>
+              <th>Tarefa</th>
+              <th>Duração</th>
+              <th>Início</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cycles.map((cycle) => {
+              return (
+                <tr key={cycle.id}>
+                  <td>{cycle.task}</td>
+                  <td>{cycle.minutesAmount} minutos</td>
+                  <td>{cycle.startDate.toLocaleString()}</td>
+                  <td>
+                    {cycle.finishedDate && (
+                      <Status statusColor="green">Concluido</Status>
+                    )}
+                    {cycle.interruptedDate && (
+                      <Status statusColor="red">Interrompido</Status>
+                    )}
+                    {!cycle.finishedDate && !cycle.interruptedDate && (
+                      <Status statusColor="yellow">Em Andamento</Status>
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </HistoryList>
     </HistoryContainer>
-  )
+  );
 }
