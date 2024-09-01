@@ -6,7 +6,12 @@ import {
   CycleStates,
   ICycle,
 } from "../interfaces/CyclesInterfaces";
-import { ActionTypes, cycleReducer } from "../reducers/CycleReducer";
+import { cycleReducer } from "../reducers/Cycle/CycleReducer";
+import {
+  addNewCycleAction,
+  finishedCycleAction,
+  interruptCycleAction,
+} from "../reducers/Cycle/actions";
 
 export const CyclesContext = createContext({} as CyclesContextData);
 
@@ -27,12 +32,7 @@ export function CyclesContextProvider({ children }: CycleContextProviderProps) {
   }
 
   function markCurrentCycleAsFinished() {
-    dispatch({
-      type: ActionTypes.FINISHED_CYCLE,
-      payload: {
-        activeCycleId,
-      },
-    });
+    dispatch(finishedCycleAction());
   }
 
   function createNewCycle(data: CreateCycleData) {
@@ -45,22 +45,12 @@ export function CyclesContextProvider({ children }: CycleContextProviderProps) {
       startDate: new Date(),
     };
 
-    dispatch({
-      type: ActionTypes.CREATE_CYCLE,
-      payload: {
-        newCycle,
-      },
-    });
+    dispatch(addNewCycleAction(newCycle));
     setTotalSecondPassed(0);
   }
 
   function InterruptCurrentCycle() {
-    dispatch({
-      type: ActionTypes.INTERRUPT_CYCLE,
-      payload: {
-        activeCycleId,
-      },
-    });
+    dispatch(interruptCycleAction());
   }
 
   return (

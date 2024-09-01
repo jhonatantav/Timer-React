@@ -1,10 +1,5 @@
-import { CycleStates } from "../interfaces/CyclesInterfaces";
-
-export enum ActionTypes {
-  CREATE_CYCLE = "CREATE_CYCLE",
-  INTERRUPT_CYCLE = "INTERRUPT_CYCLE",
-  FINISHED_CYCLE = "FINISHED_CYCLE",
-}
+import { CycleStates } from "../../interfaces/CyclesInterfaces";
+import { ActionTypes } from "./actions";
 
 export function cycleReducer(state: CycleStates, action: any) {
   switch (action.type) {
