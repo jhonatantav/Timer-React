@@ -28,3 +28,8 @@ export interface CyclesContextData {
 export interface CycleContextProviderProps {
   children: ReactNode;
 }
+
+export interface CycleStates {
+  cycles: ICycle[];
+  activeCycleId: string | null;
+}
