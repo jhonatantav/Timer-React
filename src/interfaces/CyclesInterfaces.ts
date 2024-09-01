@@ -9,19 +9,19 @@ export interface ICycle {
   finishedDate?: Date;
 }
 
-export interface CreateCycleData {
+export interface ICreateCycleData {
   task: string;
   minutesAmount: number;
 }
 
-export interface CyclesContextData {
+export interface ICyclesContextData {
   cycles: ICycle[];
   activeCycle: ICycle | undefined;
   activeCycleId: string | null;
   totalSecondPassed: number;
   markCurrentCycleAsFinished: () => void;
   setSecondsPassed: (seconds: number) => void;
-  createNewCycle: (data: CreateCycleData) => void;
+  createNewCycle: (data: ICreateCycleData) => void;
   InterruptCurrentCycle: () => void;
 }
 
@@ -29,7 +29,7 @@ export interface CycleContextProviderProps {
   children: ReactNode;
 }
 
-export interface CycleStates {
+export interface IInitialState {
   cycles: ICycle[];
   activeCycleId: string | null;
 }
